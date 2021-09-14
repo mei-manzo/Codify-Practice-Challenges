@@ -27,28 +27,21 @@
 
 def solution(A):#takes an array A
     maximum = 0
+    num_negatives = []
+    num_positives = []
+    #works for integer array with gaps
     for x in A:
-        if x>maximum:
-            maximum=x
-        else:
-            pass
-        return maximum
-    for x in A:
-        if x < -1000000 or x > 10000000:
-            return "Out of bounds"
-        elif x > 100000:
-            return "Out of bounds"
-        else:
-            pass
-    
-
-print(solution([1,2,3]))
-print("done")
-
-# def ult_analysis(A): 
-#     maximum = 0
-#     for x in A:
-#         if x>maximum:
-#             maximum = x
-#     return{ 'maximum': maximum}
-# print(ult_analysis([100,200,10,-9]))
+        if x < 0: #creating an array of negative values
+            num_negatives.append(x)
+        if len(num_negatives) == len(A): #if all ints in array are negative, n=1
+            n = 1
+        elif x > 0: #creating new array of positive integers
+            num_positives.append(x)
+        if len(num_positives) == 1 and num_positives[0] != 1: #if just one positive integer higher than 1, n will be int minus 1
+            return (num_positives[0]-1)
+        if len(num_positives) == 1 and num_positives[0] == 1:#if single positive integer is 1, n will be 2
+            return 2
+        elif len(num_positives) > 1: #now need to implement more checks to see if there are gaps
+            return ("other case")
+print(solution([-3,-4,-10,20]))
+print("finished")
