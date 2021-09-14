@@ -11,11 +11,11 @@
 
 # that, given an array A of N integers, returns the smallest positive integer (greater than 0) that does not occur in A.
 
-# For example, given A = [1, 3, 6, 4, 1, 2], the function should return 5.
+# For example, given A = [1, 3, 6, 4, 1, 2], the function should return 5. *FAIL*
 
-# Given A = [1, 2, 3], the function should return 4.
+# Given A = [1, 2, 3], the function should return 4. *PASS*
 
-# Given A = [−1, −3], the function should return 1.
+# Given A = [−1, −3], the function should return 1. *PASS*
 
 # Write an efficient algorithm for the following assumptions:
 
@@ -35,13 +35,44 @@ def solution(A):#takes an array A
             num_negatives.append(x)
         if len(num_negatives) == len(A): #if all ints in array are negative, n=1
             n = 1
-        elif x > 0: #creating new array of positive integers
+            return n
+    # return num_positives
+    for x in A:
+        if x > 0: #creating new array of positive integers
             num_positives.append(x)
+    for x in A:#tested, is accessing positives
         if len(num_positives) == 1 and num_positives[0] != 1: #if just one positive integer higher than 1, n will be int minus 1
+            print(num_positives) #printing only one value? debug this
             return (num_positives[0]-1)
-        if len(num_positives) == 1 and num_positives[0] == 1:#if single positive integer is 1, n will be 2
+        elif len(num_positives) == 1 and num_positives[0] == 1:#if single positive integer is 1, n will be 2
             return 2
         elif len(num_positives) > 1: #now need to implement more checks to see if there are gaps
-            return ("other case")
-print(solution([-3,-4,-10,20]))
-print("finished")
+            # find lowest, find highest. create a dictionary incrementing in steps of 1 using those values
+            minimum = num_positives[0]
+            maximum = num_positives[0]
+            gap_nums = []
+            for u in num_positives:
+                if u < minimum:
+                    minimum = u #sets the minimum
+                else:
+                    pass
+            for i in num_positives:
+                if i > maximum:
+                    maximum = i
+                else:
+                    pass
+            min_max = []
+            for c in range(1, maximum+1):
+                min_max.append(c) #creates the full dict
+            if len(num_positives) == len(min_max):
+                return maximum+1
+            else: #can access num_positives at this point
+                for m in min_max:    
+                    # for p in num_positives:
+                    if m not in num_positives:
+                        gap_nums.append(m)
+                lowest_gap = gap_nums[0]
+                # print("gapss")
+                return lowest_gap
+
+print(solution([-1, -3]))
