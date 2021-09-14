@@ -29,14 +29,12 @@ def solution(A):#takes an array A
     maximum = 0
     num_negatives = []
     num_positives = []
-    #works for integer array with gaps
     for x in A:
         if x < 0: #creating an array of negative values
             num_negatives.append(x)
         if len(num_negatives) == len(A): #if all ints in array are negative, n=1
             n = 1
             return n
-    # return num_positives
     for x in A:
         if x > 0: #creating new array of positive integers
             num_positives.append(x)
@@ -63,16 +61,15 @@ def solution(A):#takes an array A
                     pass
             min_max = []
             for c in range(1, maximum+1):
-                min_max.append(c) #creates the full dict
-            if len(num_positives) == len(min_max):
-                return maximum+1
+                min_max.append(c) #creates the full dict up to here running correctly
+                if min_max == num_positives:
+                    return maximum+1
             else: #can access num_positives at this point
                 for m in min_max:    
-                    # for p in num_positives:
                     if m not in num_positives:
                         gap_nums.append(m)
                 lowest_gap = gap_nums[0]
-                # print("gapss")
                 return lowest_gap
 
-print(solution([-1, -3]))
+print(solution([1, 3, 6, 4, 1, 2])) #need a code break for all positives
+print("solution")
